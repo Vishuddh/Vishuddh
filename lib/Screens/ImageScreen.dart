@@ -17,7 +17,9 @@ class _ImagesState extends State<Images> {
               backgroundColor: Colors.deepOrange,
               shadowColor: Colors.blue,
               leading: IconButton(
-                  icon: Icon(Icons.arrow_back),
+                  icon: Icon(
+                    Icons.arrow_back
+                  ),
                   onPressed: () => Navigator.push(context,
                       MaterialPageRoute(builder: (context) => More()))),
             ),
@@ -60,7 +62,7 @@ class _SasanghState extends State<Sasangh> {
               backgroundColor: Colors.deepOrange,
               shadowColor: Colors.blue,
               leading:
-                  IconButton(icon: Icon(Icons.arrow_back), onPressed: null),
+                  IconButton(icon: Icon(Icons.arrow_back,color: Colors.white,), onPressed: null),
             ),
             body: StreamBuilder<QuerySnapshot>(
                 stream: Firestore.instance.collection("Gallery").snapshots(),
@@ -73,17 +75,16 @@ class _SasanghState extends State<Sasangh> {
                         DocumentSnapshot gallery =
                             snapshot.data.documents[index];
                         if (snapshot.data == null) return Text("loading");
-                          return GridTile(
-                            child: Image.network(
-                              gallery['img'],
-                              fit: BoxFit.contain,
-                            ),
-                            footer: Container(
-                              color: Colors.white,
-                              child: Center(child: Text(gallery['name'])),
-                            ),
-                          );
-                        
+                        return GridTile(
+                          child: Image.network(
+                            gallery['img'],
+                            fit: BoxFit.contain,
+                          ),
+                          footer: Container(
+                            color: Colors.white,
+                            child: Center(child: Text(gallery['name'])),
+                          ),
+                        );
                       });
                 })));
   }

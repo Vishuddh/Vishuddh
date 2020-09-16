@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                   child: ListTile(
                     title: Text("Home Page"),
                     leading: Icon(
-                      Icons.home,color: Colors.green
+                        Icons.home,color: Colors.green
                     ),
                   ),
                 ),

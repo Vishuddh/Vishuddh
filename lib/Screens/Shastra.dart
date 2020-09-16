@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:pdf_flutter/pdf_flutter.dart';
+import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
 
 class Shastra extends StatefulWidget {
   @override
@@ -15,7 +15,7 @@ class _ShastraState extends State<Shastra> {
       child: Scaffold(
           appBar: new AppBar(
             title: Text("Shastra"),
-            leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: null),
+            leading: IconButton(icon: Icon(Icons.arrow_back,color: Colors.white,), onPressed: ()=> {}),
             actions: [
               IconButton(
                   icon: Icon(
@@ -39,11 +39,9 @@ class _ShastraState extends State<Shastra> {
                       if (snapshot.data == null)
                         return CircularProgressIndicator();
                       return ListTile(
-                        onTap: () {
-                          PDF.network(list["pdf"]);
-                        },
+                        onTap: (){},
                         leading: CircleAvatar(
-                          backgroundImage: AssetImage("images/drawer.jpg"),
+                          backgroundImage: NetworkImage(list["lead"]),
                         ),
                         title: Text(list["name"]),
                       );

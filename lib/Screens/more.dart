@@ -181,7 +181,7 @@ class _SocialsState extends State<Socials> {
                           child: FlatButton(
                               onPressed: () {
                                 _launchUniversalLinkIos(
-                                    "https://www.facebook.com/");
+                                    "https://www.facebook.com/vaibhavjainbadamalhera/?ti=as");
                               },
                               child: null),
                         ),
@@ -254,7 +254,7 @@ class Gall extends StatelessWidget {
       home: SafeArea(
           child: Scaffold(
               appBar: AppBar(
-                title: Text("Gallery"),
+                 title: Text("Gallery"),
                 backgroundColor: Colors.deepOrange,
                 leading:
                     IconButton(icon: Icon(Icons.arrow_back), onPressed: null),

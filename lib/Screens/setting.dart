@@ -18,8 +18,15 @@ class Setting extends StatelessWidget {
         scrollDirection: Axis.vertical,
         children: [
         ListTile(
+          leading: Icon(Icons.swap_horizontal_circle),
           title: Text("Theme"),
-        )
+          onTap: (){},
+        ),
+        ListTile(
+          leading: Icon(Icons.language),
+          title: Text("Language"),
+          onTap: (){},
+        ),
         ],
       ),
     );

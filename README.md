@@ -1,10 +1,9 @@
 # vishuddh
 
-A new Flutter project.
+This Project is for people of jain community. We are providing some religious  books at one platform Vishuddh for those who are interested to read. 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
