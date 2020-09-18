@@ -8,6 +8,34 @@ class Shastra extends StatefulWidget {
 }
 
 class _ShastraState extends State<Shastra> {
+  String urlPDFPath;
+  PDFDocument doc;
+  // ignore: unused_field
+  bool _isLoading;
+
+  void _loadFromUrl(String url) async {
+    setState(() {
+      _isLoading = true;
+    });
+    doc = await PDFDocument.fromURL(url);
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  /* Future<File> getFileFromUrl(String url) async {
+    try {
+      var data = await http.get(url);
+      var bytes = data.bodyBytes;
+      var dir = await getApplicationDocumentsDirectory();
+      File file = File("${dir.path}/filename");
+      File urlFile = await file.writeAsBytes(bytes);
+      return urlFile;
+    } catch (e) {
+      throw Exception("Error opening url file");
+    }
+  }
+*/
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,7 +43,12 @@ class _ShastraState extends State<Shastra> {
       child: Scaffold(
           appBar: new AppBar(
             title: Text("Shastra"),
-            leading: IconButton(icon: Icon(Icons.arrow_back,color: Colors.white,), onPressed: ()=> {}),
+            leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+                onPressed: () => {}),
             actions: [
               IconButton(
                   icon: Icon(
@@ -39,7 +72,19 @@ class _ShastraState extends State<Shastra> {
                       if (snapshot.data == null)
                         return CircularProgressIndicator();
                       return ListTile(
-                        onTap: (){},
+                        onTap: () {
+                          urlPDFPath = list["doc"];
+                          _loadFromUrl(urlPDFPath);
+                          PDFViewer(
+                            document: doc,
+                          );
+
+                          /*Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PdfViewPage(
+                                      name: list["name"], path: urlPDFPath)));*/
+                        },
                         leading: CircleAvatar(
                           backgroundImage: NetworkImage(list["lead"]),
                         ),
