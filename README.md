@@ -1,6 +1,6 @@
 # vishuddh
 
-This Project is a application which will be mostly used by jsin community . We are providing some religious  books at one platform Vishuddh for those who are interested to read. 
+This Project is a application which will be mostly used by jain community . We are providing some religious  books at one platform Vishuddh for those who are interested to read. 
 It is open to all for contributions.
 
 ## How to run in an emulator or android device
