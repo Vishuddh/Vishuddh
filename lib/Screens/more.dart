@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:vishuddh/Screens/ImageScreen.dart';
 import 'package:vishuddh/Screens/Shastra.dart';
+import 'package:vishuddh/Screens/gallary.dart';
 import 'HomeScreen.dart';
 
 class More extends StatefulWidget {
@@ -250,47 +250,6 @@ class _SocialsState extends State<Socials> {
 class Gall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
-          child: Scaffold(
-              appBar: AppBar(
-                 title: Text("Gallery"),
-                backgroundColor: Colors.deepOrange,
-                leading:
-                    IconButton(icon: Icon(Icons.arrow_back), onPressed: null),
-              ),
-              body: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                      child: GridTile(
-                        child:Image.asset("images/drawer.jpg"),
-                    footer: Container(
-                        color: Colors.white,
-                        child: InkWell(
-                          onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Images())),
-                          child: ListTile(
-                            title: Text("Acharya Shree"),
-                            leading: Icon(Icons.folder),
-                          ),
-                        )),
-                  )),
-                  Expanded(
-                      child: GridTile(
-                        child:Image.asset("images/bio.jpg"),
-                    footer: Container(
-                        color: Colors.white,
-
-                        child: InkWell(
-                          onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Sasangh())),
-                          child: ListTile(
-                            title: Text("Sasangh"),
-                            leading: Icon(Icons.folder),
-                          ),
-                        )),
-                  ))
-                ],
-              ))),
-    );
+    return GallaryPage();
   }
 }
