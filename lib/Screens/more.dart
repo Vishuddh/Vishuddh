@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vishuddh/Screens/ImageScreen.dart';
 import 'package:vishuddh/Screens/Shastra.dart';
+import 'package:vishuddh/Screens/socialsScreen.dart';
 import 'HomeScreen.dart';
 
 class More extends StatefulWidget {
@@ -13,103 +14,119 @@ class _MoreState extends State<More> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-            appBar: new AppBar(
-              title: Text("Vishuddh"),
-              backgroundColor: Colors.deepOrange,
-              leading: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () {
-                    Navigator.pop(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
-                  }),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: new AppBar(
+          title: Text("Vishuddh"),
+          backgroundColor: Colors.deepOrange,
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
+              }),
+        ),
+        body: ListView(
+          scrollDirection: Axis.vertical,
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              height: 180.0,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("images/more/Arti2.jpg"),
+                      fit: BoxFit.fill)),
+              child: FlatButton(
+                onPressed: () {},
+                child: null,
+              ),
             ),
-            body: ListView(
-              scrollDirection: Axis.vertical,
-              children: <Widget>[
-                Container(
-                  width: double.infinity,
-                  height: 180.0,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("images/more/Arti2.jpg"),
-                          fit: BoxFit.fill)),
-                  child: FlatButton(
-                    onPressed: () {},
-                    child: null,
-                  ),
+            SizedBox(
+              height: 2,
+            ),
+            Container(
+              width: double.infinity,
+              height: 180.0,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("images/more/puja.jpg"),
+                      fit: BoxFit.fill)),
+              child: FlatButton(
+                onPressed: () {},
+                child: null,
+              ),
+            ),
+            SizedBox(
+              height: 2,
+            ),
+            Container(
+              width: double.infinity,
+              height: 180.0,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("images/more/shastra.jpg"),
+                      fit: BoxFit.fill)),
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Shastra()));
+                },
+                child: null,
+              ),
+            ),
+            SizedBox(
+              height: 2,
+            ),
+            Container(
+              width: double.infinity,
+              height: 180.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("images/more/gallery.jpg"),
+                  fit: BoxFit.fill,
                 ),
-                SizedBox(
-                  height: 2,
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 180.0,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("images/more/puja.jpg"),
-                          fit: BoxFit.fill)),
-                  child: FlatButton(
-                    onPressed: () {},
-                    child: null,
-                  ),
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 180.0,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("images/more/shastra.jpg"),
-                          fit: BoxFit.fill)),
-                  child: FlatButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Shastra()));
-                    },
-                    child: null,
-                  ),
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 180.0,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("images/more/gallery.jpg"),
-                          fit: BoxFit.fill)),
-                  child: FlatButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Gall()));
-                    },
-                    child: null,
-                  ),
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 180.0,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("images/more/socials.jpg"),
-                          fit: BoxFit.cover)),
-                  child: FlatButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Socials()));
-                    },
-                    child: null,
-                  ),
-                ),
-              ],
-            )));
+              ),
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Gall(),
+                    ),
+                  );
+                },
+                child: null,
+              ),
+            ),
+            SizedBox(
+              height: 2,
+            ),
+            Container(
+              width: double.infinity,
+              height: 180.0,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("images/more/socials.jpg"),
+                      fit: BoxFit.cover)),
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      // builder: (context) => Socials(),
+
+                      // Going to the new Socials screen page
+                      builder: (context) => SocialScreen(),
+                    ),
+                  );
+                },
+                child: null,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -149,16 +166,22 @@ class _SocialsState extends State<Socials> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
           appBar: new AppBar(
             title: Text("Social media"),
             leading: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(
-                      context, MaterialPageRoute(builder: (context) => More()));
-                }),
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => More(),
+                  ),
+                );
+              },
+            ),
             backgroundColor: Colors.deepOrange,
           ),
           body: Column(
@@ -175,9 +198,11 @@ class _SocialsState extends State<Socials> {
                           width: 100,
                           height: 100,
                           decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage("images/logos/fb3.png"),
-                                  fit: BoxFit.fill)),
+                            image: DecorationImage(
+                              image: AssetImage("images/logos/fb3.png"),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
                           child: FlatButton(
                               onPressed: () {
                                 _launchUniversalLinkIos(
@@ -210,35 +235,42 @@ class _SocialsState extends State<Socials> {
               SizedBox(
                 height: 20,
               ),
-              Row(children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
+              Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage("images/logos/utube.png"),
-                            fit: BoxFit.fill)),
-                    child: FlatButton(
-                        onPressed: () {
-                          _launchUniversalLinkIos(
-                              "https://www.youtube.com/c/vishuddhavaniLivechannel");
-                        },
-                        child: null),
+                          image: AssetImage("images/logos/utube.png"),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      child: FlatButton(
+                          onPressed: () {
+                            _launchUniversalLinkIos(
+                                "https://www.youtube.com/c/vishuddhavaniLivechannel");
+                          },
+                          child: null),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 30,
-                ),
-                Container(
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Container(
                     width: 100,
                     height: 100,
                     decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("images/logos/g2.png"),
-                            fit: BoxFit.fill)))
-              ])
+                      image: DecorationImage(
+                        image: AssetImage("images/logos/g2.png"),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -251,46 +283,62 @@ class Gall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: SafeArea(
-          child: Scaffold(
-              appBar: AppBar(
-                 title: Text("Gallery"),
-                backgroundColor: Colors.deepOrange,
-                leading:
-                    IconButton(icon: Icon(Icons.arrow_back), onPressed: null),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("Gallery"),
+            backgroundColor: Colors.deepOrange,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          body: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: GridTile(
+                  child: Image.asset("images/drawer.jpg"),
+                  footer: Container(
+                    color: Colors.white,
+                    child: InkWell(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Images(),
+                        ),
+                      ),
+                      child: ListTile(
+                        title: Text("Acharya Shree"),
+                        leading: Icon(Icons.folder),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-              body: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                      child: GridTile(
-                        child:Image.asset("images/drawer.jpg"),
-                    footer: Container(
-                        color: Colors.white,
-                        child: InkWell(
-                          onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Images())),
-                          child: ListTile(
-                            title: Text("Acharya Shree"),
-                            leading: Icon(Icons.folder),
-                          ),
-                        )),
-                  )),
-                  Expanded(
-                      child: GridTile(
-                        child:Image.asset("images/bio.jpg"),
-                    footer: Container(
-                        color: Colors.white,
-
-                        child: InkWell(
-                          onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Sasangh())),
-                          child: ListTile(
-                            title: Text("Sasangh"),
-                            leading: Icon(Icons.folder),
-                          ),
-                        )),
-                  ))
-                ],
-              ))),
+              Expanded(
+                child: GridTile(
+                  child: Image.asset("images/bio.jpg"),
+                  footer: Container(
+                    color: Colors.white,
+                    child: InkWell(
+                      onTap: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Sasangh())),
+                      child: ListTile(
+                        title: Text("Sasangh"),
+                        leading: Icon(Icons.folder),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

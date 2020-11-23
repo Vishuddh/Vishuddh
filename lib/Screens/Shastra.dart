@@ -52,78 +52,87 @@ class _ShastraState extends State<Shastra> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: SafeArea(
-      child: Scaffold(
+      debugShowCheckedModeBanner: false,
+      home: SafeArea(
+        child: Scaffold(
           appBar: new AppBar(
             title: Text("Shastra"),
             leading: IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                ),
-                onPressed: () => {}),
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                // going back to the previous screen
+                Navigator.pop(context);
+              },
+            ),
             actions: [
               IconButton(
-                  icon: Icon(
-                    Icons.search,
-                    color: Colors.white,
-                  ),
-                  onPressed: null)
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                ),
+                onPressed: null,
+              ),
             ],
             backgroundColor: Colors.deepOrange,
           ),
           body: FutureBuilder(
-              future: getdata(),
-              builder: (context, snapshot) {
-                return ListView.separated(
-                    separatorBuilder: (context, index) => Divider(
-                          color: Colors.deepOrange,
-                        ),
-                    itemCount: snapshot.data.documents.length > 0
-                        ? snapshot.data.documents.length
-                        : 0,
-                    itemBuilder: (context, index) {
-                      DocumentSnapshot list = snapshot.data.documents[index];
-                      if (snapshot.data == null)
-                        return CircularProgressIndicator();
-                      return ListTile(
-                        onTap: () async {
-                          // launch(list["doc"]);
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => PdfViewerPage(
-                          //           name: list["name"], path: list["doc"])));
-                          // urlPDFPath = list["doc"];
-                          //  _loadFromUrl(urlPDFPath);
-                          // doc = await PDFDocument.fromURL(list["doc"]);
-                          // PDFViewer(
-                          //   document: doc,
-                          // );
+            future: getdata(),
+            builder: (context, AsyncSnapshot snapshot) {
+              return ListView.separated(
+                separatorBuilder: (context, index) => Divider(
+                  color: Colors.deepOrange,
+                ),
+                itemCount: snapshot.data.documents.length > 0
+                    ? snapshot.data.documents.length
+                    : 0,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot list = snapshot.data.documents[index];
+                  if (snapshot.data == null) return CircularProgressIndicator();
+                  return ListTile(
+                    onTap: () async {
+                      // launch(list["doc"]);
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => PdfViewerPage(
+                      //           name: list["name"], path: list["doc"])));
+                      // urlPDFPath = list["doc"];
+                      //  _loadFromUrl(urlPDFPath);
+                      // doc = await PDFDocument.fromURL(list["doc"]);
+                      // PDFViewer(
+                      //   document: doc,
+                      // );
 
-                          // String pathPDF =
-                          //     await createFileOfPdfUrl(list["doc"]).then((f) {
-                          //   // setState(() {
-                          //   String pathPDF;
-                          //   pathPDF = f.path;
-                          //   print(pathPDF);
-                          //   return pathPDF;
-                          //   // });
-                          // });
+                      // String pathPDF =
+                      //     await createFileOfPdfUrl(list["doc"]).then((f) {
+                      //   // setState(() {
+                      //   String pathPDF;
+                      //   pathPDF = f.path;
+                      //   print(pathPDF);
+                      //   return pathPDF;
+                      //   // });
+                      // });
 
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PdfViewPage(
-                                      name: list["name"], path: list["doc"])));
-                        },
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(list["lead"]),
-                        ),
-                        title: Text(list["name"]),
-                      );
-                    });
-              })),
-    ));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PdfViewPage(
+                                  name: list["name"], path: list["doc"])));
+                    },
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(list["lead"]),
+                    ),
+                    title: Text(list["name"]),
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ),
+    );
   }
 }
