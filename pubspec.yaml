@@ -36,6 +36,7 @@ dev_dependencies:
   flutter_plugin_pdf_viewer: ^1.0.6
   url_launcher: ^5.6.0
   flutter_full_pdf_viewer: ^1.0.6
+  flutter_local_notifications: ^3.0.3
 
 
 

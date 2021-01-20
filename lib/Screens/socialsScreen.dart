@@ -98,7 +98,7 @@ class _SocialScreenState extends State<SocialScreen> {
                     'Instagram Page',
                   ),
                   subtitle: Text(
-                    'Go to the FaceBook page for the app',
+                    'Go to the instagram page for the app',
                   ),
                   onTap: () {
                     // url to go to the instagram page

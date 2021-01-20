@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:vishuddh/Screens/more.dart';
+import 'package:vishuddh/Screens/full_image.dart';
 
 class Images extends StatefulWidget {
   @override
@@ -39,7 +40,25 @@ class _ImagesState extends State<Images> {
                 if (snapshot.data != null) {}
 
                 return GridTile(
-                  child: Image.network(gallery["img"]),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return FullImage(
+                              imageName: 'Drawer',
+                              // imagePath: 'images/drawer.jpg',
+                              imagePath: gallery['img'],
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    child: Image.network(
+                      gallery["img"],
+                    ),
+                  ),
                   footer: Container(
                     color: Colors.white,
                     child: Text(gallery["name"]),
