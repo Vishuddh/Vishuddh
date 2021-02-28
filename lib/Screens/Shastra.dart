@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
 import 'package:vishuddh/PDF/ViewPdf.dart';
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -117,10 +116,14 @@ class _ShastraState extends State<Shastra> {
                       // });
 
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PdfViewPage(
-                                  name: list["name"], path: list["doc"])));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PdfViewPage(
+                            name: list["name"],
+                            path: list["doc"],
+                          ),
+                        ),
+                      );
                     },
                     leading: CircleAvatar(
                       backgroundImage: NetworkImage(list["lead"]),
