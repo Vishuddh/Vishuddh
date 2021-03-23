@@ -45,6 +45,7 @@ class FullImage extends StatelessWidget {
         // using the nameOnAppBar property here
         nameOnAppBar,
       ),
+      backgroundColor: Colors.deepOrange,
     );
   }
 }

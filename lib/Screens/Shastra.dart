@@ -19,7 +19,7 @@ class _ShastraState extends State<Shastra> {
 
   Future getdata() async {
     var firestore = Firestore.instance;
-    QuerySnapshot qn = await firestore.collection("pdfs").getDocuments();
+    QuerySnapshot qn = await firestore.collection("pdfs").orderBy("name").getDocuments();
     return qn;
   }
 
@@ -66,15 +66,6 @@ class _ShastraState extends State<Shastra> {
                 Navigator.pop(context);
               },
             ),
-            actions: [
-              IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
-                onPressed: null,
-              ),
-            ],
             backgroundColor: Colors.deepOrange,
           ),
           body: FutureBuilder(
@@ -88,7 +79,7 @@ class _ShastraState extends State<Shastra> {
                     ? snapshot.data.documents.length
                     : 0,
                 itemBuilder: (context, index) {
-                  DocumentSnapshot list = snapshot.data.documents[index];
+                  DocumentSnapshot list = snapshot.data.documents[index] ;
                   if (snapshot.data == null) return CircularProgressIndicator();
                   return ListTile(
                     onTap: () async {

@@ -33,8 +33,11 @@ class _ImagesState extends State<Images> {
           builder: (context, snapshot) {
             return GridView.builder(
               gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,crossAxisSpacing: 8,
+               mainAxisSpacing: 8,
+                  ),
               itemCount: snapshot.data.documents.length,
+            
               itemBuilder: (context, index) {
                 DocumentSnapshot gallery = snapshot.data.documents[index];
                 if (snapshot.data != null) {}
@@ -47,16 +50,17 @@ class _ImagesState extends State<Images> {
                         MaterialPageRoute(
                           builder: (context) {
                             return FullImage(
-                              imageName: 'Drawer',
-                              // imagePath: 'images/drawer.jpg',
+                              imageName:Text(gallery['name']),
                               imagePath: gallery['img'],
                             );
                           },
                         ),
                       );
                     },
-                    child: Image.network(
-                      gallery["img"],
+                    child: Container(
+                      child: Image.network(
+                        gallery["img"],fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   footer: Container(
@@ -101,19 +105,36 @@ class _SasanghState extends State<Sasangh> {
           builder: (context, snapshot) {
             return GridView.builder(
               gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) {
                 DocumentSnapshot gallery = snapshot.data.documents[index];
                 if (snapshot.data == null) return Text("loading");
                 return GridTile(
-                  child: Image.network(
-                    gallery['img'],
-                    fit: BoxFit.contain,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return FullImage(
+                              // change the images collection here to sasangh 
+                              imageName:Text(gallery['name']),
+                              imagePath: gallery['img'],
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    child: Container(
+                      child: Image.network(
+                        gallery["img"],fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                   footer: Container(
                     color: Colors.white,
-                    child: Center(child: Text(gallery['name'])),
+                    child: Text(gallery["name"]),
                   ),
                 );
               },

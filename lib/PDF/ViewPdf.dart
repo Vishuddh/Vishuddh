@@ -58,16 +58,17 @@ class _PdfViewPageState extends State<PdfViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: true,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text(widget.name),
+        backgroundColor: Colors.deepOrange,
       ),
       body: Center(
         child: _isLoading
             ? Center(child: CircularProgressIndicator())
             : PDFViewer(
                 document: document,
-                indicatorText: Colors.deepOrange,
+                indicatorText: Colors.white,
                 indicatorBackground: Colors.deepOrange,
               ),
       ),
