@@ -1,7 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:vishuddh/Screens/more.dart';
 import 'package:http/http.dart' as http;
+import 'package:vishuddh/services/app_localizations_delegate.dart';
+import 'package:vishuddh/services/language_data.dart';
+import 'package:vishuddh/services/languages.dart';
+import 'package:vishuddh/services/locale_constants.dart';
 
 // youtube api key
 const apiKey = 'need your own api here';
@@ -15,15 +20,65 @@ const newUrl =
     'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCt4t-jeY85JegMlZ-E5UWtA&type=video&eventType=live&key=AIzaSyD_78DvsgLsmUVc_-tDoIaIurJbSAgg2K4';
 
 class HomePage extends StatefulWidget {
+  static void setLocale(BuildContext context, Locale newLocale) {
+    var state = context.findAncestorStateOfType<_HomePageState>();
+    state.setLocale(newLocale);
+  }
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  Locale _locale;
+
+  // the function below is used to create a drop down
+  // button to chage the language of the app
+  DropdownButton createlanguageButtonDropdown() {
+    DropdownButton<LanguageData>(
+      iconSize: 30,
+      hint: Text(Languages.of(context).labelSelectLanguage),
+      onChanged: (LanguageData language) {
+        changeLanguage(context, language.languageCode);
+      },
+      items: LanguageData.languageList()
+          .map<DropdownMenuItem<LanguageData>>(
+            (e) => DropdownMenuItem<LanguageData>(
+              value: e,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Text(
+                    e.flag,
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  Text(e.name)
+                ],
+              ),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  void setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
+
+  @override
+  void didChangeDependencies() async {
+    getLocale().then((locale) {
+      setState(() {
+        _locale = locale;
+      });
+    });
+    super.didChangeDependencies();
+  }
+
   // the property below is used to store the status of the channel
   String status = '';
-
-  
 
   Future getData() async {
     http.Response response = await http.get(newUrl);
@@ -91,12 +146,59 @@ class _HomePageState extends State<HomePage> {
 
     // printData();
     return MaterialApp(
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaleFactor: 1.0,
+          ),
+          child: child,
+        );
+      },
+      locale: _locale,
+      supportedLocales: [
+        Locale('en', ''),
+        Locale('hi', ''),
+      ],
+      localizationsDelegates: [
+        AppLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        for (var supportedLocale in supportedLocales) {
+          if (supportedLocale?.languageCode == locale?.languageCode &&
+              supportedLocale?.countryCode == locale?.countryCode) {
+            return supportedLocale;
+          }
+        }
+        return supportedLocales?.first;
+      },
       theme: ThemeData(primarySwatch: Colors.deepOrange),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: new AppBar(
-          title: Text("Vishuddh"),
+          title: Text(
+            Languages.of(context).appBarName,
+
+            // change the above line of code to visuddh
+          ),
           backgroundColor: Colors.deepOrange,
+          // need to remove the actions button below
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.more_vert,
+              ),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return createlanguageButtonDropdown();
+                    });
+              },
+            ),
+          ],
         ),
         drawer: Drawer(
           child: ListView(
@@ -121,12 +223,25 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               InkWell(
-                onTap: () {},
                 child: ListTile(
-                  title: Text("Home Page"),
-                  leading: Icon(Icons.home, color: Colors.green),
+                  title: Text(
+                    'Change Language',
+                  ),
+                  leading: Icon(
+                    Icons.language,
+                    color: Colors.green,
+                  ),
                 ),
               ),
+              // InkWell(
+              //   onTap: () {
+              //     createlanguageButtonDropdown();
+              //   },
+              //   child: ListTile(
+              //     title: Text("Home Page"),
+              //     leading: Icon(Icons.home, color: Colors.green),
+              //   ),
+              // ),
               InkWell(
                 onTap: () {},
                 child: ListTile(
@@ -187,21 +302,24 @@ class _HomePageState extends State<HomePage> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   IconButton(
-                      icon: Icon(
-                        Icons.notifications,
-                        color: Colors.blue,
-                      ),
-                      onPressed: null,),
+                    icon: Icon(
+                      Icons.notifications,
+                      color: Colors.blue,
+                    ),
+                    onPressed: null,
+                  ),
                   Text(
                     "Notifications",
-                    style: TextStyle(color: Colors.orange,),
+                    style: TextStyle(
+                      color: Colors.orange,
+                    ),
                   ),
                 ],
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  FlatButton(
+                  TextButton(
                     onPressed: () {},
                     child: Container(
                       width: 40,
