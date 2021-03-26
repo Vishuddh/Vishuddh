@@ -17,7 +17,7 @@ const apiKey = 'need your own api here';
 
 // new url for getting the notifications
 const newUrl =
-    'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCt4t-jeY85JegMlZ-E5UWtA&type=video&eventType=live&key=AIzaSyD_78DvsgLsmUVc_-tDoIaIurJbSAgg2K4';
+    'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCt4t-jeY85JegMlZ-E5UWtA&type=video&eventType=live&key=$apiKey';
 
 class HomePage extends StatefulWidget {
   static void setLocale(BuildContext context, Locale newLocale) {
